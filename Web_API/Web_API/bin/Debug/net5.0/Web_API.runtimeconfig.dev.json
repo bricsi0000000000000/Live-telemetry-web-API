@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\stercore_archa\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\stercore_archa\\.nuget\\packages"
+    ]
+  }
+}
