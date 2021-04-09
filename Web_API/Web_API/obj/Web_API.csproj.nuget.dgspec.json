@@ -1,20 +1,102 @@
 {
   "format": 1,
   "restore": {
-    "D:\\programming\\ART\\live-telemetry\\web_api\\Web_API\\Web_API\\Web_API.csproj": {}
+    "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\Web_API\\Web_API.csproj": {}
   },
   "projects": {
-    "D:\\programming\\ART\\live-telemetry\\web_api\\Web_API\\Web_API\\Web_API.csproj": {
+    "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\programming\\ART\\live-telemetry\\web_api\\Web_API\\Web_API\\Web_API.csproj",
-        "projectName": "Web_API",
-        "projectPath": "D:\\programming\\ART\\live-telemetry\\web_api\\Web_API\\Web_API\\Web_API.csproj",
-        "packagesPath": "C:\\Users\\stercore_archa\\.nuget\\packages\\",
-        "outputPath": "D:\\programming\\ART\\live-telemetry\\web_api\\Web_API\\Web_API\\obj\\",
+        "projectUniqueName": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj",
+        "projectName": "DataLayer",
+        "projectPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj",
+        "packagesPath": "C:\\Users\\q\\.nuget\\packages\\",
+        "outputPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\stercore_archa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\q\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.11, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[3.2.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\Web_API\\Web_API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\Web_API\\Web_API.csproj",
+        "projectName": "Web_API",
+        "projectPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\Web_API\\Web_API.csproj",
+        "packagesPath": "C:\\Users\\q\\.nuget\\packages\\",
+        "outputPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\Web_API\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,7 +109,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj": {
+                "projectPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -83,7 +169,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -4,7 +4,26 @@
         <name>Web_API</name>
     </assembly>
     <members>
-        <member name="M:Web_API.Controllers.TimeController.Get">
+        <member name="M:Web_API.Controllers.SectionController.Get">
+            <returns>Returns the ID of the active section.</returns>
+        </member>
+        <member name="M:Web_API.Controllers.SectionController.Post(DataLayer.Models.Section)">
+            <summary>
+            Adds new section.
+            </summary>
+            <param name="section">New section to add.</param>
+            <response code="200">Sucessfully added.</response>
+            <response code="500">There was an error adding <paramref name="section"/>.</response>       
+        </member>
+        <member name="M:Web_API.Controllers.SectionController.Put(System.Int32)">
+            <summary>
+            Changes the live section to the section with <paramref name="sectionID"/>.
+            </summary>
+            <param name="sectionID">ID of the new active section.</param>
+            <response code="200">Sucessfully changed.</response>
+            <response code="500">There was an error changeing the live section.</response>       
+        </member>
+        <member name="M:Web_API.Controllers.SensorControllers.TimeController.Get">
             <summary>
             Gets the list of the Time channel.
             </summary>
@@ -28,7 +47,7 @@
             </remarks>
             <returns>All Time data.</returns>
         </member>
-        <member name="M:Web_API.Controllers.TimeController.Get(System.Int32)">
+        <member name="M:Web_API.Controllers.SensorControllers.TimeController.Get(System.Int32)">
             <summary>
             Gets a single Time based on <paramref name="id"/>.
             </summary>
@@ -43,7 +62,7 @@
             <param name="id">ID of the value.</param>
             <returns>A single Time.</returns>
         </member>
-        <member name="M:Web_API.Controllers.TimeController.Post(System.Single)">
+        <member name="M:Web_API.Controllers.SensorControllers.TimeController.Post(System.Single)">
             <summary>
             Posts a new value into Times.
             </summary>
