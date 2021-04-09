@@ -1,1 +1,1 @@
-# WEB API for ART data center
+# Web API for a live telemetry system
