@@ -10,18 +10,52 @@
         <member name="M:Web_API.Controllers.SectionController.Post(DataLayer.Models.Section)">
             <summary>
             Adds new section.
+            You onnly have to add the name and date
             </summary>
             <param name="section">New section to add.</param>
             <response code="200">Sucessfully added.</response>
             <response code="500">There was an error adding <paramref name="section"/>.</response>       
         </member>
-        <member name="M:Web_API.Controllers.SectionController.Put(System.Int32)">
+        <member name="M:Web_API.Controllers.SectionController.ChangeToLive(System.Int32)">
             <summary>
-            Changes the live section to the section with <paramref name="sectionID"/>.
+            Changes the live section to the section with <paramref name="sectionID"/> if there no live section.
             </summary>
-            <param name="sectionID">ID of the new active section.</param>
+            <param name="sectionID">ID of the section.</param>
             <response code="200">Sucessfully changed.</response>
-            <response code="500">There was an error changeing the live section.</response>       
+            <response code="500">There was an error with the database.</response>       
+            <response code="409">There is already an active section.</response>       
+        </member>
+        <member name="M:Web_API.Controllers.SectionController.ChangeToOffline(System.Int32)">
+            <summary>
+            Changes the section with <paramref name="sectionID"/> to offline.
+            </summary>
+            <param name="sectionID">ID of the section.</param>
+            <response code="200">Sucessfully changed.</response>
+            <response code="500">There was an error with the database.</response>       
+        </member>
+        <member name="M:Web_API.Controllers.SectionController.ChangeName(DataLayer.Models.Section)">
+            <summary>
+            Changes the section's name.
+            </summary>
+            <param name="section">Section with new name.</param>
+            <response code="200">Sucessfully changed.</response>
+            <response code="500">There was an error with the database.</response>       
+        </member>
+        <member name="M:Web_API.Controllers.SectionController.ChangeDate(DataLayer.Models.Section)">
+            <summary>
+            Changes the section's date.
+            </summary>
+            <param name="section">Section with new date.</param>
+            <response code="200">Sucessfully changed.</response>
+            <response code="500">There was an error with the database.</response>       
+        </member>
+        <member name="M:Web_API.Controllers.SectionController.Delete(System.Int32)">
+            <summary>
+            Deletes the section with <paramref name="sectionID"/>.
+            </summary>
+            <param name="sectionID">ID of the section.</param>
+            <response code="200">Sucessfully changed.</response>
+            <response code="500">There was an error with the database.</response>       
         </member>
         <member name="M:Web_API.Controllers.SensorControllers.TimeController.Get">
             <summary>
