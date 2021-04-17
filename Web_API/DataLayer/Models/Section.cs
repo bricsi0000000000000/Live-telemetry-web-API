@@ -1,8 +1,5 @@
-﻿using DataLayer.Models.Sensors;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace DataLayer.Models
 {
@@ -10,7 +7,6 @@ namespace DataLayer.Models
     {
         [Key]
         public int ID { get; set; }
-
         public bool IsLive { get; set; }
 
         [Required]
