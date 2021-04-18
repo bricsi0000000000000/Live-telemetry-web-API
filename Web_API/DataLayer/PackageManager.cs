@@ -32,6 +32,8 @@ namespace DataLayer
                     database.Speeds.Add(speed);
                 }
 
+                database.Packages.Add(package);
+
                 database.SaveChanges();
             }
             catch (Exception exception)
@@ -50,6 +52,13 @@ namespace DataLayer
                 };
 
                 var database = new DatabaseContext();
+
+                database.Packages.Load();
+                var findPackage = database.Packages.ToList().Find(x => x.ID == packageID);
+                if (findPackage != null)
+                {
+                    package.SentTime = findPackage.SentTime;
+                }
 
                 database.Times.Load();
                 foreach (var time in database.Times)

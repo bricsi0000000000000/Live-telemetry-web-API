@@ -27,10 +27,12 @@ namespace Web_API.Controllers
             try
             {
                 dynamic json = JsonConvert.DeserializeObject(packageJson);
+
                 var package = new Package()
                 {
                     ID = json.id,
-                    SectionID = json.sectionID
+                    SectionID = json.sectionID,
+                    SentTime = json.sentTime
                 };
 
                 for (int i = 0; i < json.speeds.Count; i++)
@@ -55,7 +57,7 @@ namespace Web_API.Controllers
 
                 PackageManager.AddPackage(package);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return HttpStatusCode.InternalServerError;
             }

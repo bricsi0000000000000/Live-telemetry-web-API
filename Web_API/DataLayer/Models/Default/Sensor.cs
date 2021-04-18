@@ -12,7 +12,6 @@ namespace DataLayer.Models.Default
         virtual public ValueType Value { get; set; }
 
         [Required]
-        [ForeignKey("package")]
         public int PackageID { get; set; }
     }
 }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210410075506_UpdateAnnotations")]
-    partial class UpdateAnnotations
+    [Migration("20210418073822_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,23 @@ namespace DataLayer.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("DataLayer.Models.Package", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionID")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("SentTime")
+                        .HasColumnType("time(6)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Packages");
+                });
 
             modelBuilder.Entity("DataLayer.Models.Section", b =>
                 {
