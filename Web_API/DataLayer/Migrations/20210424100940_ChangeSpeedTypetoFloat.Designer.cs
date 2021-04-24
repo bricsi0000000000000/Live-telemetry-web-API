@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210424100940_ChangeSpeedTypetoFloat")]
+    partial class ChangeSpeedTypetoFloat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +74,6 @@ namespace DataLayer.Migrations
                     b.Property<int>("PackageID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionID")
-                        .HasColumnType("int");
-
                     b.Property<float>("Value")
                         .HasColumnType("real");
 
@@ -91,9 +90,6 @@ namespace DataLayer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("PackageID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionID")
                         .HasColumnType("int");
 
                     b.Property<float>("Value")

@@ -29,6 +29,7 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
+        [Route("get_all/{sectionID}")]
         public IEnumerable<Package> GetAll(int sectionID)
         {
             return PackageManager.GetAllPackages(sectionID);
@@ -45,7 +46,6 @@ namespace Web_API.Controllers
 
                 var package = new Package()
                 {
-                    ID = json.id,
                     SectionID = json.sectionID,
                     SentTime = json.sentTime
                 };
@@ -54,9 +54,8 @@ namespace Web_API.Controllers
                 {
                     package.Speeds.Add(new Speed()
                     {
-                        ID = json.speeds[i].id,
-                        PackageID = json.id,
-                        Value = json.speeds[i].value
+                        Value = json.speeds[i].value,
+                        SectionID = json.sectionID
                     });
                 }
 
@@ -64,9 +63,8 @@ namespace Web_API.Controllers
                 {
                     package.Times.Add(new Time()
                     {
-                        ID = json.times[i].id,
-                        PackageID = json.id,
-                        Value = json.times[i].value
+                        Value = json.times[i].value,
+                        SectionID = json.sectionID
                     });
                 }
 

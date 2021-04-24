@@ -38,11 +38,7 @@ namespace Web_API.Controllers
         [ProducesResponseType(500)]
         public HttpStatusCode Post([FromBody] Section section)
         {
-            HttpStatusCode httpStatusCode;
-
-            httpStatusCode = SectionManager.AddSection(section);
-            
-            return httpStatusCode;
+            return SectionManager.AddSection(section);
         }
 
         /// <summary>

@@ -13,33 +13,39 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
+                database.Packages.Load();
+                int newPackageID = database.Packages.ToList().Any() ? database.Packages.ToList().Last().ID + 1 : 1;
+
+                database.Sections.Load();
+                int sectionID = database.Sections.ToList().Where(x => x.IsLive).FirstOrDefault().ID;
 
                 database.Times.Load();
-                int lastTimeID = database.Times.ToList().Count > 0 ? database.Times.ToList().Last().ID : -1;
+                int lastTimeID = database.Times.ToList().Any() ? database.Times.ToList().Last().ID : -1;
                 foreach (var time in package.Times)
                 {
                     database.Times.Add(new Models.Sensors.Time()
                     {
-                        PackageID = package.ID,
+                        SectionID = sectionID,
+                        PackageID = newPackageID,
                         Value = time.Value
                     });
                 }
 
                 database.Speeds.Load();
-                int lastSpeedID = database.Speeds.ToList().Count > 0 ? database.Speeds.ToList().Last().ID : -1;
+                int lastSpeedID = database.Speeds.ToList().Any() ? database.Speeds.ToList().Last().ID : -1;
                 foreach (var speed in package.Speeds)
                 {
                     database.Speeds.Add(new Models.Sensors.Speed()
                     {
-                        PackageID = package.ID,
+                        SectionID = sectionID,
+                        PackageID = newPackageID,
                         Value = speed.Value
                     });
                 }
 
-                database.Packages.Load();
                 database.Packages.Add(new Package()
                 {
-                    SectionID = package.SectionID,
+                    SectionID = sectionID,
                     SentTime = package.SentTime
                 });
 
@@ -102,7 +108,7 @@ namespace DataLayer
             {
                 var database = new DatabaseContext();
                 database.Packages.Load();
-                var storedPackages = database.Packages.ToList();
+                var storedPackages = database.Packages.Where(x => x.SectionID == sectionID).ToList();
                 var packages = new List<Package>();
 
                 foreach (var currentPackage in storedPackages)
