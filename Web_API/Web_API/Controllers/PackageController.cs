@@ -4,6 +4,7 @@ using DataLayer.Models.Sensors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Web_API.Controllers
@@ -13,10 +14,24 @@ namespace Web_API.Controllers
     public class PackageController : ControllerBase
     {
         [HttpGet]
-        [Route("{id}")]
-        public Package Get(int id)
+        [Route("get_single/{packageID}/{sectionID}")]
+        public Package Get(int packageID, int sectionID)
         {
-            return PackageManager.GetPackage(id);
+            return PackageManager.GetPackage(packageID, sectionID);
+        }
+
+        /// <returns>All package, that is after <paramref name="lastPackageID"/>.</returns>
+        [HttpGet]
+        [Route("get_after/{lastPackageID}/{sectionID}")]
+        public IEnumerable<Package> GetAfter(int lastPackageID, int sectionID)
+        {
+            return PackageManager.GetPackages(lastPackageID, sectionID);
+        }
+
+        [HttpGet]
+        public IEnumerable<Package> GetAll(int sectionID)
+        {
+            return PackageManager.GetAllPackages(sectionID);
         }
 
         [HttpPost]
@@ -27,10 +42,12 @@ namespace Web_API.Controllers
             try
             {
                 dynamic json = JsonConvert.DeserializeObject(packageJson);
+
                 var package = new Package()
                 {
                     ID = json.id,
-                    SectionID = json.sectionID
+                    SectionID = json.sectionID,
+                    SentTime = json.sentTime
                 };
 
                 for (int i = 0; i < json.speeds.Count; i++)
@@ -55,7 +72,7 @@ namespace Web_API.Controllers
 
                 PackageManager.AddPackage(package);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return HttpStatusCode.InternalServerError;
             }

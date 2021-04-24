@@ -4,6 +4,9 @@
         <name>Web_API</name>
     </assembly>
     <members>
+        <member name="M:Web_API.Controllers.PackageController.GetAfter(System.Int32,System.Int32)">
+            <returns>All package, that is after <paramref name="lastPackageID"/>.</returns>
+        </member>
         <member name="M:Web_API.Controllers.SectionController.Get">
             <returns>Returns the ID of the active section.</returns>
         </member>

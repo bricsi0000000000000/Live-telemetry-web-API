@@ -91,7 +91,7 @@ namespace DataLayer
 
                 var newSection = new Section()
                 {
-                    ID = database.Sections.ToList().Last().ID + 1,
+                    ID = database.Sections.ToList().Any() ? database.Sections.ToList().Last().ID + 1 : 0,
                     Name = section.Name,
                     Date = section.Date,
                     SensorNames = sensorNames
@@ -99,6 +99,8 @@ namespace DataLayer
 
                 database.Sections.Add(newSection);
                 database.SaveChanges();
+
+                ChangeActiveSection(newSection.ID, isLive: false);
 
                 return HttpStatusCode.OK;
             }

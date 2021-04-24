@@ -41,11 +41,7 @@ namespace Web_API.Controllers
             HttpStatusCode httpStatusCode;
 
             httpStatusCode = SectionManager.AddSection(section);
-            if (httpStatusCode == HttpStatusCode.OK)
-            {
-                httpStatusCode = SectionManager.ChangeActiveSection(section.ID, isLive: false);
-            }
-
+            
             return httpStatusCode;
         }
 
