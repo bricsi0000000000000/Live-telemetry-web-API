@@ -18,21 +18,30 @@ namespace DataLayer
                 int lastTimeID = database.Times.ToList().Count > 0 ? database.Times.ToList().Last().ID : -1;
                 foreach (var time in package.Times)
                 {
-                    time.ID = ++lastTimeID;
-                    time.PackageID = package.ID;
-                    database.Times.Add(time);
+                    database.Times.Add(new Models.Sensors.Time()
+                    {
+                        PackageID = package.ID,
+                        Value = time.Value
+                    });
                 }
 
                 database.Speeds.Load();
                 int lastSpeedID = database.Speeds.ToList().Count > 0 ? database.Speeds.ToList().Last().ID : -1;
                 foreach (var speed in package.Speeds)
                 {
-                    speed.ID = ++lastSpeedID;
-                    speed.PackageID = package.ID;
-                    database.Speeds.Add(speed);
+                    database.Speeds.Add(new Models.Sensors.Speed()
+                    {
+                        PackageID = package.ID,
+                        Value = speed.Value
+                    });
                 }
 
-                database.Packages.Add(package);
+                database.Packages.Load();
+                database.Packages.Add(new Package()
+                {
+                    SectionID = package.SectionID,
+                    SentTime = package.SentTime
+                });
 
                 database.SaveChanges();
             }
@@ -42,23 +51,24 @@ namespace DataLayer
             }
         }
 
-        public static Package GetPackage(int packageID)
+        public static Package GetPackage(int packageID, int sectionID)
         {
             try
             {
+                var database = new DatabaseContext();
+                database.Packages.Load();
+
+                var findPackage = database.Packages.Where(x => x.ID == packageID && x.SectionID == sectionID).FirstOrDefault();
+                if (findPackage == null)
+                {
+                    return null;
+                }
+
                 Package package = new Package()
                 {
-                    ID = packageID
+                    ID = packageID,
+                    SentTime = findPackage.SentTime
                 };
-
-                var database = new DatabaseContext();
-
-                database.Packages.Load();
-                var findPackage = database.Packages.ToList().Find(x => x.ID == packageID);
-                if (findPackage != null)
-                {
-                    package.SentTime = findPackage.SentTime;
-                }
 
                 database.Times.Load();
                 foreach (var time in database.Times)
@@ -84,6 +94,59 @@ namespace DataLayer
             {
                 throw exception;
             }
+        }
+
+        public static List<Package> GetPackages(int lastSentPackageID, int sectionID)
+        {
+            try
+            {
+                var database = new DatabaseContext();
+                database.Packages.Load();
+                var storedPackages = database.Packages.ToList();
+                var packages = new List<Package>();
+
+                foreach (var currentPackage in storedPackages)
+                {
+                    if (currentPackage.ID > lastSentPackageID)
+                    {
+                        Package package = new Package()
+                        {
+                            ID = currentPackage.ID
+                        };
+
+                        database.Times.Load();
+                        foreach (var time in database.Times)
+                        {
+                            if (time.PackageID == currentPackage.ID)
+                            {
+                                package.Times.Add(time);
+                            }
+                        }
+
+                        database.Speeds.Load();
+                        foreach (var speed in database.Speeds)
+                        {
+                            if (speed.PackageID == currentPackage.ID)
+                            {
+                                package.Speeds.Add(speed);
+                            }
+                        }
+
+                        packages.Add(package);
+                    }
+                }
+
+                return packages;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public static List<Package> GetAllPackages(int sectionID)
+        {
+            return GetPackages(0, sectionID);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace DataLayer
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("Server=localhost;Database=DataCenter;Uid=root;Pwd=;");
+            optionsBuilder.UseSqlServer("Server=RICSI; Initial Catalog=DataCenter; Integrated Security=SSPI;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
