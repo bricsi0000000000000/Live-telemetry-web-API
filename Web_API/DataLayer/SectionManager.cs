@@ -91,7 +91,6 @@ namespace DataLayer
 
                 var newSection = new Section()
                 {
-                    ID = database.Sections.ToList().Any() ? database.Sections.ToList().Last().ID + 1 : 0,
                     Name = section.Name,
                     Date = section.Date,
                     SensorNames = sensorNames

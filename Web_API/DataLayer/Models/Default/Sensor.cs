@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Models.Default
 {
@@ -13,5 +12,8 @@ namespace DataLayer.Models.Default
 
         [Required]
         public int PackageID { get; set; }
+
+        [Required]
+        public int SectionID { get; set; }
     }
 }
