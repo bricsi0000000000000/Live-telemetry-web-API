@@ -8,7 +8,7 @@ namespace DataLayer
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("Server=localhost;Database=Channels;Uid=root;Pwd=;");
+            optionsBuilder.UseSqlServer("Server=RICSI; Initial Catalog=DataCenter; Integrated Security=SSPI;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -19,5 +19,6 @@ namespace DataLayer
         public DbSet<Time> Times { get; set; }
         public DbSet<Speed> Speeds { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<Package> Packages { get; set; }
     }
 }
