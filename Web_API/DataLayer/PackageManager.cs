@@ -17,7 +17,14 @@ namespace DataLayer
                 int newPackageID = database.Packages.ToList().Any() ? database.Packages.ToList().Last().ID + 1 : 1;
 
                 database.Sections.Load();
-                int sectionID = database.Sections.ToList().Where(x => x.IsLive).FirstOrDefault().ID;
+                var liveSection = database.Sections.ToList().Where(x => x.IsLive);
+                if (liveSection == null || !liveSection.Any())
+                {
+                    throw new Exception("There is no live section");
+                }
+
+                int sectionID = liveSection.FirstOrDefault().ID;
+
 
                 database.Times.Load();
                 int lastTimeID = database.Times.ToList().Any() ? database.Times.ToList().Last().ID : -1;
