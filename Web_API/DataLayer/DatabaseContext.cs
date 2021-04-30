@@ -16,9 +16,15 @@ namespace DataLayer
 
         }
 
-        public DbSet<Time> Times { get; set; }
-        public DbSet<Speed> Speeds { get; set; }
-        public DbSet<Section> Sections { get; set; }
-        public DbSet<Package> Packages { get; set; }
+        public DbSet<Section> Section { get; set; }
+        public DbSet<Package> Package { get; set; }
+
+        #region sensor tables
+
+        public DbSet<Time> Time { get; set; }
+        public DbSet<Speed> Speed { get; set; }
+        public DbSet<Yaw> Yaw { get; set; }
+
+        #endregion
     }
 }

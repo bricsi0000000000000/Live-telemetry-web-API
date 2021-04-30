@@ -1,5 +1,4 @@
 ﻿using DataLayer.Models.Sensors;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,8 +15,10 @@ namespace DataLayer.Models
         public long SentTime { get; set; }
 
         [NotMapped]
-        public List<Speed> Speeds { get; set; } = new List<Speed>();
+        public List<Speed> SpeedValues { get; set; } = new List<Speed>();
         [NotMapped]
-        public List<Time> Times { get; set; } = new List<Time>();
+        public List<Time> TimeValues { get; set; } = new List<Time>();
+        [NotMapped]
+        public List<Yaw> YawValues { get; set; } = new List<Yaw>();
     }
 }
