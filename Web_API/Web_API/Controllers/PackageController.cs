@@ -50,20 +50,29 @@ namespace Web_API.Controllers
                     SentTime = json.sentTime
                 };
 
-                for (int i = 0; i < json.speeds.Count; i++)
+                for (int i = 0; i < json.speedValues.Count; i++)
                 {
-                    package.Speeds.Add(new Speed()
+                    package.SpeedValues.Add(new Speed()
                     {
-                        Value = json.speeds[i].value,
+                        Value = json.speedValues[i].value,
                         SectionID = json.sectionID
                     });
                 }
 
-                for (int i = 0; i < json.times.Count; i++)
+                for (int i = 0; i < json.timeValues.Count; i++)
                 {
-                    package.Times.Add(new Time()
+                    package.TimeValues.Add(new Time()
                     {
-                        Value = json.times[i].value,
+                        Value = json.timeValues[i].value,
+                        SectionID = json.sectionID
+                    });
+                }
+
+                for (int i = 0; i < json.yawValues.Count; i++)
+                {
+                    package.YawValues.Add(new Yaw()
+                    {
+                        Value = json.yawValues[i].value,
                         SectionID = json.sectionID
                     });
                 }

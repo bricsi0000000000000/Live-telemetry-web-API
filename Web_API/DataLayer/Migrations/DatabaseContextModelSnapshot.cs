@@ -34,7 +34,7 @@ namespace DataLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Packages");
+                    b.ToTable("Package");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Section", b =>
@@ -59,7 +59,7 @@ namespace DataLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Sections");
+                    b.ToTable("Section");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Sensors.Speed", b =>
@@ -80,7 +80,7 @@ namespace DataLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Speeds");
+                    b.ToTable("Speed");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Sensors.Time", b =>
@@ -101,7 +101,28 @@ namespace DataLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Times");
+                    b.ToTable("Time");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Sensors.Yaw", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PackageID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Yaw");
                 });
 #pragma warning restore 612, 618
         }

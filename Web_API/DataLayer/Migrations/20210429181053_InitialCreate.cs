@@ -8,7 +8,7 @@ namespace DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Packages",
+                name: "Package",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -18,11 +18,11 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Packages", x => x.ID);
+                    table.PrimaryKey("PK_Package", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sections",
+                name: "Section",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -34,51 +34,71 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sections", x => x.ID);
+                    table.PrimaryKey("PK_Section", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Speeds",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<int>(type: "int", nullable: false),
-                    PackageID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Speeds", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Times",
+                name: "Speed",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Value = table.Column<float>(type: "real", nullable: false),
-                    PackageID = table.Column<int>(type: "int", nullable: false)
+                    PackageID = table.Column<int>(type: "int", nullable: false),
+                    SectionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Times", x => x.ID);
+                    table.PrimaryKey("PK_Speed", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Time",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<float>(type: "real", nullable: false),
+                    PackageID = table.Column<int>(type: "int", nullable: false),
+                    SectionID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Time", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Yaw",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<float>(type: "real", nullable: false),
+                    PackageID = table.Column<int>(type: "int", nullable: false),
+                    SectionID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Yaw", x => x.ID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Packages");
+                name: "Package");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                name: "Section");
 
             migrationBuilder.DropTable(
-                name: "Speeds");
+                name: "Speed");
 
             migrationBuilder.DropTable(
-                name: "Times");
+                name: "Time");
+
+            migrationBuilder.DropTable(
+                name: "Yaw");
         }
     }
 }

@@ -13,11 +13,11 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Packages.Load();
-                int newPackageID = database.Packages.ToList().Any() ? database.Packages.ToList().Last().ID + 1 : 1;
+                database.Package.Load();
+                int newPackageID = database.Package.ToList().Any() ? database.Package.ToList().Last().ID + 1 : 1;
 
-                database.Sections.Load();
-                var liveSection = database.Sections.ToList().Where(x => x.IsLive);
+                database.Section.Load();
+                var liveSection = database.Section.ToList().Where(x => x.IsLive);
                 if (liveSection == null || !liveSection.Any())
                 {
                     throw new Exception("There is no live section");
@@ -26,11 +26,10 @@ namespace DataLayer
                 int sectionID = liveSection.FirstOrDefault().ID;
 
 
-                database.Times.Load();
-                int lastTimeID = database.Times.ToList().Any() ? database.Times.ToList().Last().ID : -1;
-                foreach (var time in package.Times)
+                database.Time.Load();
+                foreach (var time in package.TimeValues)
                 {
-                    database.Times.Add(new Models.Sensors.Time()
+                    database.Time.Add(new Models.Sensors.Time()
                     {
                         SectionID = sectionID,
                         PackageID = newPackageID,
@@ -38,11 +37,10 @@ namespace DataLayer
                     });
                 }
 
-                database.Speeds.Load();
-                int lastSpeedID = database.Speeds.ToList().Any() ? database.Speeds.ToList().Last().ID : -1;
-                foreach (var speed in package.Speeds)
+                database.Speed.Load();
+                foreach (var speed in package.SpeedValues)
                 {
-                    database.Speeds.Add(new Models.Sensors.Speed()
+                    database.Speed.Add(new Models.Sensors.Speed()
                     {
                         SectionID = sectionID,
                         PackageID = newPackageID,
@@ -50,7 +48,18 @@ namespace DataLayer
                     });
                 }
 
-                database.Packages.Add(new Package()
+                database.Yaw.Load();
+                foreach (var yaw in package.YawValues)
+                {
+                    database.Yaw.Add(new Models.Sensors.Yaw()
+                    {
+                        SectionID = sectionID,
+                        PackageID = newPackageID,
+                        Value = yaw.Value
+                    });
+                }
+
+                database.Package.Add(new Package()
                 {
                     SectionID = sectionID,
                     SentTime = package.SentTime
@@ -69,9 +78,9 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Packages.Load();
+                database.Package.Load();
 
-                var findPackage = database.Packages.Where(x => x.ID == packageID && x.SectionID == sectionID).FirstOrDefault();
+                var findPackage = database.Package.Where(x => x.ID == packageID && x.SectionID == sectionID).FirstOrDefault();
                 if (findPackage == null)
                 {
                     return null;
@@ -83,21 +92,30 @@ namespace DataLayer
                     SentTime = findPackage.SentTime
                 };
 
-                database.Times.Load();
-                foreach (var time in database.Times)
+                database.Time.Load();
+                foreach (var time in database.Time)
                 {
                     if (time.PackageID == packageID)
                     {
-                        package.Times.Add(time);
+                        package.TimeValues.Add(time);
                     }
                 }
 
-                database.Speeds.Load();
-                foreach (var speed in database.Speeds)
+                database.Speed.Load();
+                foreach (var speed in database.Speed)
                 {
                     if (speed.PackageID == packageID)
                     {
-                        package.Speeds.Add(speed);
+                        package.SpeedValues.Add(speed);
+                    }
+                }
+
+                database.Yaw.Load();
+                foreach (var yaw in database.Yaw)
+                {
+                    if (yaw.PackageID == packageID)
+                    {
+                        package.YawValues.Add(yaw);
                     }
                 }
 
@@ -114,8 +132,8 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Packages.Load();
-                var storedPackages = database.Packages.Where(x => x.SectionID == sectionID).ToList();
+                database.Package.Load();
+                var storedPackages = database.Package.Where(x => x.SectionID == sectionID).ToList();
                 var packages = new List<Package>();
 
                 foreach (var currentPackage in storedPackages)
@@ -127,21 +145,30 @@ namespace DataLayer
                             ID = currentPackage.ID
                         };
 
-                        database.Times.Load();
-                        foreach (var time in database.Times)
+                        database.Time.Load();
+                        foreach (var time in database.Time)
                         {
                             if (time.PackageID == currentPackage.ID)
                             {
-                                package.Times.Add(time);
+                                package.TimeValues.Add(time);
                             }
                         }
 
-                        database.Speeds.Load();
-                        foreach (var speed in database.Speeds)
+                        database.Speed.Load();
+                        foreach (var speed in database.Speed)
                         {
                             if (speed.PackageID == currentPackage.ID)
                             {
-                                package.Speeds.Add(speed);
+                                package.SpeedValues.Add(speed);
+                            }
+                        }
+
+                        database.Yaw.Load();
+                        foreach (var yaw in database.Yaw)
+                        {
+                            if (yaw.PackageID == currentPackage.ID)
+                            {
+                                package.YawValues.Add(yaw);
                             }
                         }
 

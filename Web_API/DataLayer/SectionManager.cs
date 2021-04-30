@@ -11,7 +11,7 @@ namespace DataLayer
 {
     public static class SectionManager
     {
-        private static readonly string sensorNames = $"{nameof(Speed)};{nameof(Time)}";
+        private static readonly string sensorNames = $"{nameof(Speed)};{nameof(Time)};{nameof(Yaw)}";
 
         /// <summary>
         /// Returns the active section ID.
@@ -24,8 +24,8 @@ namespace DataLayer
                 try
                 {
                     var database = new DatabaseContext();
-                    database.Sections.Load();
-                    foreach (var section in database.Sections)
+                    database.Section.Load();
+                    foreach (var section in database.Section)
                     {
                         if (section.IsLive)
                         {
@@ -48,8 +48,8 @@ namespace DataLayer
             get
             {
                 var database = new DatabaseContext();
-                database.Sections.Load();
-                return database.Sections.ToList();
+                database.Section.Load();
+                return database.Section.ToList();
             }
         }
 
@@ -61,17 +61,17 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Sections.Load();
+                database.Section.Load();
 
                 if (isLive)
                 {
-                    if (database.Sections.ToList().FindAll(x => x.IsLive).Count > 0)
+                    if (database.Section.ToList().FindAll(x => x.IsLive).Count > 0)
                     {
                         return HttpStatusCode.Conflict;
                     }
                 }
 
-                database.Sections.ToList().Find(x => x.ID == sectionID).IsLive = isLive;
+                database.Section.ToList().Find(x => x.ID == sectionID).IsLive = isLive;
                 database.SaveChanges();
 
                 return HttpStatusCode.OK;
@@ -87,7 +87,7 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Sections.Load();
+                database.Section.Load();
 
                 var newSection = new Section()
                 {
@@ -96,7 +96,7 @@ namespace DataLayer
                     SensorNames = sensorNames
                 };
 
-                database.Sections.Add(newSection);
+                database.Section.Add(newSection);
                 database.SaveChanges();
 
                 ChangeActiveSection(newSection.ID, isLive: false);
@@ -115,9 +115,9 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Sections.Load();
+                database.Section.Load();
 
-                database.Sections.ToList().Find(x => x.ID == section.ID).Name = section.Name;
+                database.Section.ToList().Find(x => x.ID == section.ID).Name = section.Name;
 
                 database.SaveChanges();
 
@@ -135,9 +135,9 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Sections.Load();
+                database.Section.Load();
 
-                database.Sections.ToList().Find(x => x.ID == section.ID).Date = section.Date;
+                database.Section.ToList().Find(x => x.ID == section.ID).Date = section.Date;
 
                 database.SaveChanges();
 
@@ -155,12 +155,12 @@ namespace DataLayer
             try
             {
                 var database = new DatabaseContext();
-                database.Sections.Load();
+                database.Section.Load();
 
-                var section = database.Sections.ToList().Find(x => x.ID == sectionID);
+                var section = database.Section.ToList().Find(x => x.ID == sectionID);
                 if (section != null)
                 {
-                    database.Sections.Remove(section);
+                    database.Section.Remove(section);
                     database.SaveChanges();
                 }
 
