@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj": {}
+    "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj": {}
   },
   "projects": {
-    "d:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj": {
+    "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "d:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj",
+        "projectPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\DataLayer.csproj",
         "packagesPath": "C:\\Users\\q\\.nuget\\packages\\",
-        "outputPath": "d:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\obj\\",
+        "outputPath": "D:\\programming\\c#\\thesis\\Live-telemetry-web-API\\Web_API\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
