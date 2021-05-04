@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210429181053_InitialCreate")]
+    [Migration("20210504135246_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,18 +28,81 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("SectionID")
-                        .HasColumnType("int");
-
                     b.Property<long>("SentTime")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("SessionID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.ToTable("Package");
                 });
 
-            modelBuilder.Entity("DataLayer.Models.Section", b =>
+            modelBuilder.Entity("DataLayer.Models.Sensors.Speed", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PackageID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Speed");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Sensors.Time", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PackageID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Time");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Sensors.Yaw", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PackageID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Yaw");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Session", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -61,70 +124,7 @@ namespace DataLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Section");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.Sensors.Speed", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PackageID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionID")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Speed");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.Sensors.Time", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PackageID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionID")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Time");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.Sensors.Yaw", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PackageID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionID")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Yaw");
+                    b.ToTable("Session");
                 });
 #pragma warning restore 612, 618
         }

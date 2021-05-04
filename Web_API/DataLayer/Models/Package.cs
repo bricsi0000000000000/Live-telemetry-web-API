@@ -10,7 +10,7 @@ namespace DataLayer.Models
         [Required]
         public int ID { get; set; }
         [Required]
-        public int SectionID { get; set; }
+        public int SessionID { get; set; }
         [Required]
         public long SentTime { get; set; }
 

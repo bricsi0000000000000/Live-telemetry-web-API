@@ -14,25 +14,25 @@ namespace Web_API.Controllers
     public class PackageController : ControllerBase
     {
         [HttpGet]
-        [Route("get_single/{packageID}/{sectionID}")]
-        public Package Get(int packageID, int sectionID)
+        [Route("get_single/{packageID}/{sessionID}")]
+        public Package Get(int packageID, int sessionID)
         {
-            return PackageManager.GetPackage(packageID, sectionID);
+            return PackageManager.GetPackage(packageID, sessionID);
         }
 
         /// <returns>All package, that is after <paramref name="lastPackageID"/>.</returns>
         [HttpGet]
-        [Route("get_after/{lastPackageID}/{sectionID}")]
-        public IEnumerable<Package> GetAfter(int lastPackageID, int sectionID)
+        [Route("get_after/{lastPackageID}/{sessionID}")]
+        public IEnumerable<Package> GetAfter(int lastPackageID, int sessionID)
         {
-            return PackageManager.GetPackages(lastPackageID, sectionID);
+            return PackageManager.GetPackages(lastPackageID, sessionID);
         }
 
         [HttpGet]
-        [Route("get_all/{sectionID}")]
-        public IEnumerable<Package> GetAll(int sectionID)
+        [Route("get_all/{sessionID}")]
+        public IEnumerable<Package> GetAll(int sessionID)
         {
-            return PackageManager.GetAllPackages(sectionID);
+            return PackageManager.GetAllPackages(sessionID);
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace Web_API.Controllers
 
                 var package = new Package()
                 {
-                    SectionID = json.sectionID,
+                    SessionID = json.SessionID,
                     SentTime = json.sentTime
                 };
 
@@ -55,7 +55,7 @@ namespace Web_API.Controllers
                     package.SpeedValues.Add(new Speed()
                     {
                         Value = json.speedValues[i].value,
-                        SectionID = json.sectionID
+                        SessionID = json.SessionID
                     });
                 }
 
@@ -64,7 +64,7 @@ namespace Web_API.Controllers
                     package.TimeValues.Add(new Time()
                     {
                         Value = json.timeValues[i].value,
-                        SectionID = json.sectionID
+                        SessionID = json.SessionID
                     });
                 }
 
@@ -73,7 +73,7 @@ namespace Web_API.Controllers
                     package.YawValues.Add(new Yaw()
                     {
                         Value = json.yawValues[i].value,
-                        SectionID = json.sectionID
+                        SessionID = json.SessionID
                     });
                 }
 

@@ -16,7 +16,7 @@ namespace DataLayer
 
         }
 
-        public DbSet<Section> Section { get; set; }
+        public DbSet<Session> Session { get; set; }
         public DbSet<Package> Package { get; set; }
 
         #region sensor tables
