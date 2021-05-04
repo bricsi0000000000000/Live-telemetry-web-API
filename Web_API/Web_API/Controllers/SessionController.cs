@@ -9,114 +9,114 @@ namespace Web_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SectionController : ControllerBase
+    public class SessionController : ControllerBase
     {
-        /// <returns>Returns the ID of the active section.</returns>
+        /// <returns>Returns the ID of the active session.</returns>
         [HttpGet]
         [Route("live")]
-        public Section Get()
+        public Session Get()
         {
-            return SectionManager.ActiveSection;
+            return SessionManager.ActiveSession;
         }
 
         [HttpGet]
         [Route("all")]
-        public IEnumerable<Section> GetAll()
+        public IEnumerable<Session> GetAll()
         {
-            return SectionManager.AllSections;
+            return SessionManager.AllSessions;
         }
 
         /// <summary>
-        /// Adds new section.
+        /// Adds new Session.
         /// You onnly have to add the name and date
         /// </summary>
-        /// <param name="section">New section to add.</param>
+        /// <param name="session">New Session to add.</param>
         /// <response code="200">Sucessfully added.</response>
-        /// <response code="409">There is already a section with <paramref name="section"/>s name.</response>       
-        /// <response code="500">There was an error adding <paramref name="section"/>.</response>       
+        /// <response code="409">There is already a Session with <paramref name="session"/>s name.</response>       
+        /// <response code="500">There was an error adding <paramref name="session"/>.</response>       
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
-        public HttpStatusCode Post([FromBody] Section section)
+        public HttpStatusCode Post([FromBody] Session session)
         {
-            return SectionManager.AddSection(section);
+            return SessionManager.AddSession(session);
         }
 
         /// <summary>
-        /// Changes the live section to the section with <paramref name="sectionID"/> if there no live section.
+        /// Changes the live Session to the Session with <paramref name="sessionID"/> if there no live Session.
         /// </summary>
-        /// <param name="sectionID">ID of the section.</param>
+        /// <param name="sessionID">ID of the Session.</param>
         /// <response code="200">Sucessfully changed.</response>
-        /// <response code="409">There is already an active section.</response>       
+        /// <response code="409">There is already an active Session.</response>       
         /// <response code="500">There was an error with the database.</response>       
         [HttpPut]
         [Route("change_live")]
         [ProducesResponseType(200)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
-        public HttpStatusCode ChangeToLive([FromBody] int sectionID)
+        public HttpStatusCode ChangeToLive([FromBody] int sessionID)
         {
-            return SectionManager.ChangeActiveSection(sectionID, isLive: true);
+            return SessionManager.ChangeActiveSession(sessionID, isLive: true);
         }
 
         /// <summary>
-        /// Changes the section with <paramref name="sectionID"/> to offline.
+        /// Changes the Session with <paramref name="sessionID"/> to offline.
         /// </summary>
-        /// <param name="sectionID">ID of the section.</param>
+        /// <param name="sessionID">ID of the Session.</param>
         /// <response code="200">Sucessfully changed.</response>
         /// <response code="500">There was an error with the database.</response>       
         [HttpPut]
         [Route("change_offline")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public HttpStatusCode ChangeToOffline([FromBody] int sectionID)
+        public HttpStatusCode ChangeToOffline([FromBody] int sessionID)
         {
-            return SectionManager.ChangeActiveSection(sectionID, isLive: false);
+            return SessionManager.ChangeActiveSession(sessionID, isLive: false);
         }
 
         /// <summary>
-        /// Changes the section's name.
+        /// Changes the Session's name.
         /// </summary>
-        /// <param name="section">Section with new name.</param>
+        /// <param name="session">Session with new name.</param>
         /// <response code="200">Sucessfully changed.</response>
         /// <response code="500">There was an error with the database.</response>       
         [HttpPut]
         [Route("change_name")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public HttpStatusCode ChangeName([FromBody] Section section)
+        public HttpStatusCode ChangeName([FromBody] Session session)
         {
-            return SectionManager.ChangeName(section);
+            return SessionManager.ChangeName(session);
         }
 
         /// <summary>
-        /// Changes the section's date.
+        /// Changes the Session's date.
         /// </summary>
-        /// <param name="section">Section with new date.</param>
+        /// <param name="session">Session with new date.</param>
         /// <response code="200">Sucessfully changed.</response>
         /// <response code="500">There was an error with the database.</response>       
         [HttpPut]
         [Route("change_date")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public HttpStatusCode ChangeDate([FromBody] Section section)
+        public HttpStatusCode ChangeDate([FromBody] Session session)
         {
-            return SectionManager.ChangeDate(section);
+            return SessionManager.ChangeDate(session);
         }
 
         /// <summary>
-        /// Deletes the section with <paramref name="sectionID"/>.
+        /// Deletes the Session with <paramref name="sessionID"/>.
         /// </summary>
-        /// <param name="sectionID">ID of the section.</param>
+        /// <param name="sessionID">ID of the Session.</param>
         /// <response code="200">Sucessfully changed.</response>
         /// <response code="500">There was an error with the database.</response>       
         [HttpDelete]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public HttpStatusCode Delete([FromQuery] int sectionID)
+        public HttpStatusCode Delete([FromQuery] int sessionID)
         {
-            return SectionManager.Delete(sectionID);
+            return SessionManager.Delete(sessionID);
         }
     }
 }

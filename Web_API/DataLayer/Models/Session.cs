@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Models
 {
-    public class Section
+    public class Session
     {
         [Key]
         public int ID { get; set; }

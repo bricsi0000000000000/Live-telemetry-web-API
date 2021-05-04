@@ -14,6 +14,6 @@ namespace DataLayer.Models.Default
         public int PackageID { get; set; }
 
         [Required]
-        public int SectionID { get; set; }
+        public int SessionID { get; set; }
     }
 }

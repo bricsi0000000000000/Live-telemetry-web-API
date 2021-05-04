@@ -13,7 +13,7 @@ namespace DataLayer.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SectionID = table.Column<int>(type: "int", nullable: false),
+                    SessionID = table.Column<int>(type: "int", nullable: false),
                     SentTime = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -22,7 +22,7 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Section",
+                name: "Session",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -34,7 +34,7 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Section", x => x.ID);
+                    table.PrimaryKey("PK_Session", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,7 +45,7 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Value = table.Column<float>(type: "real", nullable: false),
                     PackageID = table.Column<int>(type: "int", nullable: false),
-                    SectionID = table.Column<int>(type: "int", nullable: false)
+                    SessionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,7 +60,7 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Value = table.Column<float>(type: "real", nullable: false),
                     PackageID = table.Column<int>(type: "int", nullable: false),
-                    SectionID = table.Column<int>(type: "int", nullable: false)
+                    SessionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,7 +75,7 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Value = table.Column<float>(type: "real", nullable: false),
                     PackageID = table.Column<int>(type: "int", nullable: false),
-                    SectionID = table.Column<int>(type: "int", nullable: false)
+                    SessionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,7 +89,7 @@ namespace DataLayer.Migrations
                 name: "Package");
 
             migrationBuilder.DropTable(
-                name: "Section");
+                name: "Session");
 
             migrationBuilder.DropTable(
                 name: "Speed");

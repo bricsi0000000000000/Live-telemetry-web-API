@@ -16,14 +16,14 @@ namespace DataLayer
                 database.Package.Load();
                 int newPackageID = database.Package.ToList().Any() ? database.Package.ToList().Last().ID + 1 : 1;
 
-                database.Section.Load();
-                var liveSection = database.Section.ToList().Where(x => x.IsLive);
-                if (liveSection == null || !liveSection.Any())
+                database.Session.Load();
+                var liveSession = database.Session.ToList().Where(x => x.IsLive);
+                if (liveSession == null || !liveSession.Any())
                 {
-                    throw new Exception("There is no live section");
+                    throw new Exception("There is no live Session");
                 }
 
-                int sectionID = liveSection.FirstOrDefault().ID;
+                int sessionID = liveSession.FirstOrDefault().ID;
 
 
                 database.Time.Load();
@@ -31,7 +31,7 @@ namespace DataLayer
                 {
                     database.Time.Add(new Models.Sensors.Time()
                     {
-                        SectionID = sectionID,
+                        SessionID = sessionID,
                         PackageID = newPackageID,
                         Value = time.Value
                     });
@@ -42,7 +42,7 @@ namespace DataLayer
                 {
                     database.Speed.Add(new Models.Sensors.Speed()
                     {
-                        SectionID = sectionID,
+                        SessionID = sessionID,
                         PackageID = newPackageID,
                         Value = speed.Value
                     });
@@ -53,7 +53,7 @@ namespace DataLayer
                 {
                     database.Yaw.Add(new Models.Sensors.Yaw()
                     {
-                        SectionID = sectionID,
+                        SessionID = sessionID,
                         PackageID = newPackageID,
                         Value = yaw.Value
                     });
@@ -61,7 +61,7 @@ namespace DataLayer
 
                 database.Package.Add(new Package()
                 {
-                    SectionID = sectionID,
+                    SessionID = sessionID,
                     SentTime = package.SentTime
                 });
 
@@ -73,14 +73,14 @@ namespace DataLayer
             }
         }
 
-        public static Package GetPackage(int packageID, int sectionID)
+        public static Package GetPackage(int packageID, int sessionID)
         {
             try
             {
                 var database = new DatabaseContext();
                 database.Package.Load();
 
-                var findPackage = database.Package.Where(x => x.ID == packageID && x.SectionID == sectionID).FirstOrDefault();
+                var findPackage = database.Package.Where(x => x.ID == packageID && x.SessionID == sessionID).FirstOrDefault();
                 if (findPackage == null)
                 {
                     return null;
@@ -127,13 +127,13 @@ namespace DataLayer
             }
         }
 
-        public static List<Package> GetPackages(int lastSentPackageID, int sectionID)
+        public static List<Package> GetPackages(int lastSentPackageID, int sessionID)
         {
             try
             {
                 var database = new DatabaseContext();
                 database.Package.Load();
-                var storedPackages = database.Package.Where(x => x.SectionID == sectionID).ToList();
+                var storedPackages = database.Package.Where(x => x.SessionID == sessionID).ToList();
                 var packages = new List<Package>();
 
                 foreach (var currentPackage in storedPackages)
@@ -184,9 +184,9 @@ namespace DataLayer
             }
         }
 
-        public static List<Package> GetAllPackages(int sectionID)
+        public static List<Package> GetAllPackages(int sessionID)
         {
-            return GetPackages(0, sectionID);
+            return GetPackages(0, sessionID);
         }
     }
 }

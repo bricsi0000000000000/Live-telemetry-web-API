@@ -28,7 +28,7 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("SectionID")
+                    b.Property<int>("SessionID")
                         .HasColumnType("int");
 
                     b.Property<long>("SentTime")
@@ -39,7 +39,7 @@ namespace DataLayer.Migrations
                     b.ToTable("Package");
                 });
 
-            modelBuilder.Entity("DataLayer.Models.Section", b =>
+            modelBuilder.Entity("DataLayer.Models.Session", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace DataLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Section");
+                    b.ToTable("Session");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Sensors.Speed", b =>
@@ -74,7 +74,7 @@ namespace DataLayer.Migrations
                     b.Property<int>("PackageID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionID")
+                    b.Property<int>("SessionID")
                         .HasColumnType("int");
 
                     b.Property<float>("Value")
@@ -95,7 +95,7 @@ namespace DataLayer.Migrations
                     b.Property<int>("PackageID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionID")
+                    b.Property<int>("SessionID")
                         .HasColumnType("int");
 
                     b.Property<float>("Value")
@@ -116,7 +116,7 @@ namespace DataLayer.Migrations
                     b.Property<int>("PackageID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionID")
+                    b.Property<int>("SessionID")
                         .HasColumnType("int");
 
                     b.Property<float>("Value")

@@ -9,27 +9,27 @@ using System.Text;
 
 namespace DataLayer
 {
-    public static class SectionManager
+    public static class SessionManager
     {
         private static readonly string sensorNames = $"{nameof(Speed)};{nameof(Time)};{nameof(Yaw)}";
 
         /// <summary>
-        /// Returns the active section ID.
+        /// Returns the active session ID.
         /// If there isn't any, it returns with -1.
         /// </summary>
-        public static Section ActiveSection
+        public static Session ActiveSession
         {
             get
             {
                 try
                 {
                     var database = new DatabaseContext();
-                    database.Section.Load();
-                    foreach (var section in database.Section)
+                    database.Session.Load();
+                    foreach (var session in database.Session)
                     {
-                        if (section.IsLive)
+                        if (session.IsLive)
                         {
-                            return section;
+                            return session;
                         }
                     }
                 }
@@ -43,35 +43,35 @@ namespace DataLayer
             }
         }
 
-        public static List<Section> AllSections
+        public static List<Session> AllSessions
         {
             get
             {
                 var database = new DatabaseContext();
-                database.Section.Load();
-                return database.Section.ToList();
+                database.Session.Load();
+                return database.Session.ToList();
             }
         }
 
         /// <summary>
-        /// Changes the section's state with <paramref name="sectionID"/> to <paramref name="isLive"/>.
+        /// Changes the Session's state with <paramref name="sessionID"/> to <paramref name="isLive"/>.
         /// </summary>
-        public static HttpStatusCode ChangeActiveSection(int sectionID, bool isLive)
+        public static HttpStatusCode ChangeActiveSession(int sessionID, bool isLive)
         {
             try
             {
                 var database = new DatabaseContext();
-                database.Section.Load();
+                database.Session.Load();
 
                 if (isLive)
                 {
-                    if (database.Section.ToList().FindAll(x => x.IsLive).Count > 0)
+                    if (database.Session.ToList().FindAll(x => x.IsLive).Count > 0)
                     {
                         return HttpStatusCode.Conflict;
                     }
                 }
 
-                database.Section.ToList().Find(x => x.ID == sectionID).IsLive = isLive;
+                database.Session.ToList().Find(x => x.ID == sessionID).IsLive = isLive;
                 database.SaveChanges();
 
                 return HttpStatusCode.OK;
@@ -82,29 +82,29 @@ namespace DataLayer
             }
         }
 
-        public static HttpStatusCode AddSection(Section section)
+        public static HttpStatusCode AddSession(Session session)
         {
             try
             {
                 var database = new DatabaseContext();
-                database.Section.Load();
+                database.Session.Load();
 
-                if (database.Section.Where(x => x.Name.Equals(section.Name)).Any())
+                if (database.Session.Where(x => x.Name.Equals(session.Name)).Any())
                 {
                     return HttpStatusCode.Conflict;
                 }
 
-                var newSection = new Section()
+                var newSession = new Session()
                 {
-                    Name = section.Name,
-                    Date = section.Date,
+                    Name = session.Name,
+                    Date = session.Date,
                     SensorNames = sensorNames
                 };
 
-                database.Section.Add(newSection);
+                database.Session.Add(newSession);
                 database.SaveChanges();
 
-                ChangeActiveSection(newSection.ID, isLive: false);
+                ChangeActiveSession(newSession.ID, isLive: false);
 
                 return HttpStatusCode.OK;
             }
@@ -114,35 +114,15 @@ namespace DataLayer
             }
         }
 
-        public static HttpStatusCode ChangeName(Section section)
+        public static HttpStatusCode ChangeName(Session session)
         {
 
             try
             {
                 var database = new DatabaseContext();
-                database.Section.Load();
+                database.Session.Load();
 
-                database.Section.ToList().Find(x => x.ID == section.ID).Name = section.Name;
-
-                database.SaveChanges();
-
-                return HttpStatusCode.OK;
-            }
-            catch (Exception)
-            {
-                return HttpStatusCode.InternalServerError;
-            }
-        }
-
-        public static HttpStatusCode ChangeDate(Section section)
-        {
-
-            try
-            {
-                var database = new DatabaseContext();
-                database.Section.Load();
-
-                database.Section.ToList().Find(x => x.ID == section.ID).Date = section.Date;
+                database.Session.ToList().Find(x => x.ID == session.ID).Name = session.Name;
 
                 database.SaveChanges();
 
@@ -154,18 +134,38 @@ namespace DataLayer
             }
         }
 
-        public static HttpStatusCode Delete(int sectionID)
+        public static HttpStatusCode ChangeDate(Session session)
         {
 
             try
             {
                 var database = new DatabaseContext();
-                database.Section.Load();
+                database.Session.Load();
 
-                var section = database.Section.ToList().Find(x => x.ID == sectionID);
-                if (section != null)
+                database.Session.ToList().Find(x => x.ID == session.ID).Date = session.Date;
+
+                database.SaveChanges();
+
+                return HttpStatusCode.OK;
+            }
+            catch (Exception)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+        }
+
+        public static HttpStatusCode Delete(int sessionID)
+        {
+
+            try
+            {
+                var database = new DatabaseContext();
+                database.Session.Load();
+
+                var Session = database.Session.ToList().Find(x => x.ID == sessionID);
+                if (Session != null)
                 {
-                    database.Section.Remove(section);
+                    database.Session.Remove(Session);
                     database.SaveChanges();
                 }
 
