@@ -20,7 +20,7 @@
     "Web_API": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "http://192.168.1.33:5000",
       "environmentVariables": {

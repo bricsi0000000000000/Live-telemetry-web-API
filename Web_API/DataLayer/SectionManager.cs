@@ -89,6 +89,11 @@ namespace DataLayer
                 var database = new DatabaseContext();
                 database.Section.Load();
 
+                if (database.Section.Where(x => x.Name.Equals(section.Name)).Any())
+                {
+                    return HttpStatusCode.Conflict;
+                }
+
                 var newSection = new Section()
                 {
                     Name = section.Name,
