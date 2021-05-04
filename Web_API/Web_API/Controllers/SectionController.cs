@@ -32,9 +32,11 @@ namespace Web_API.Controllers
         /// </summary>
         /// <param name="section">New section to add.</param>
         /// <response code="200">Sucessfully added.</response>
+        /// <response code="409">There is already a section with <paramref name="section"/>s name.</response>       
         /// <response code="500">There was an error adding <paramref name="section"/>.</response>       
         [HttpPost]
         [ProducesResponseType(200)]
+        [ProducesResponseType(409)]
         [ProducesResponseType(500)]
         public HttpStatusCode Post([FromBody] Section section)
         {
@@ -46,8 +48,8 @@ namespace Web_API.Controllers
         /// </summary>
         /// <param name="sectionID">ID of the section.</param>
         /// <response code="200">Sucessfully changed.</response>
-        /// <response code="500">There was an error with the database.</response>       
         /// <response code="409">There is already an active section.</response>       
+        /// <response code="500">There was an error with the database.</response>       
         [HttpPut]
         [Route("change_live")]
         [ProducesResponseType(200)]
