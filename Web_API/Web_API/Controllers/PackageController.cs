@@ -46,7 +46,7 @@ namespace Web_API.Controllers
 
                 var package = new Package()
                 {
-                    SessionID = json.SessionID,
+                    SessionID = json.sessionID,
                     SentTime = json.sentTime
                 };
 
@@ -55,7 +55,7 @@ namespace Web_API.Controllers
                     package.SpeedValues.Add(new Speed()
                     {
                         Value = json.speedValues[i].value,
-                        SessionID = json.SessionID
+                        SessionID = json.sessionID
                     });
                 }
 
@@ -64,7 +64,7 @@ namespace Web_API.Controllers
                     package.TimeValues.Add(new Time()
                     {
                         Value = json.timeValues[i].value,
-                        SessionID = json.SessionID
+                        SessionID = json.sessionID
                     });
                 }
 
@@ -73,7 +73,7 @@ namespace Web_API.Controllers
                     package.YawValues.Add(new Yaw()
                     {
                         Value = json.yawValues[i].value,
-                        SessionID = json.SessionID
+                        SessionID = json.sessionID
                     });
                 }
 
